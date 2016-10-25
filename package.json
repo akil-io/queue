@@ -1,0 +1,31 @@
+{
+  "name": "env-rmq",
+  "version": "1.0.0",
+  "description": "PubSub, Queue, RPC wrapper for RabbitMQ",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/akil-io/queue.git"
+  },
+  "keywords": [
+    "queue",
+    "pubsub",
+    "rpc",
+    "amqp",
+    "rabbitmq"
+  ],
+  "author": "Alex Martynov",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/akil-io/queue/issues"
+  },
+  "homepage": "https://github.com/akil-io/queue#readme",
+  "dependencies": {
+    "amqplib": "^0.4.2",
+    "debug": "^2.2.0",
+    "node-uuid": "^1.4.7"
+  }
+}
