@@ -15,17 +15,18 @@ class RabbitMQ {
 	}
 
 	connect(_ready) {
-		amqp.connect(this.config.uri, (function (_err, _conn) {
+		amqp.connect(this.config.uri, (_err, _conn) => {
 			if (_err) {
 				return _ready(new Error("Can not connect to RabbitMQ"));
 			} else {
 				this.connection = _conn;
 				_ready(null);
 			}
-		}).bind(this));
+		});
 	}
 
 	worker(_name, _handler) {
+		debug('rmq > call to worker...', this.connection);
 		if (this.connection == null) return;
 
 		if (this.queue.has(_name)) {
@@ -35,6 +36,7 @@ class RabbitMQ {
 				return this.queue.get(_name);
 			}
 		}
+
 		this.queue.set(_name, new Worker(_name, _handler));
 
 		return this.queue.get(_name).register(this.connection);

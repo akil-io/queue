@@ -24,8 +24,8 @@
   },
   "homepage": "https://github.com/akil-io/queue#readme",
   "dependencies": {
-    "amqplib": "^0.4.2",
-    "debug": "^2.2.0",
-    "node-uuid": "^1.4.7"
+    "amqplib": "^0.5.1",
+    "debug": "^2.6.8",
+    "node-uuid": "^1.4.8"
   }
 }
