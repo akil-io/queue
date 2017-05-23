@@ -1,6 +1,6 @@
 {
   "name": "env-rmq",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "PubSub, Queue, RPC wrapper for RabbitMQ",
   "main": "index.js",
   "scripts": {
