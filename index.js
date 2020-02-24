@@ -1,7 +1,7 @@
 'use strict'
 
 var debug 	= require('debug')('env:rabbitmq');
-var amqp = require('amqplib/callback_api');
+var amqp = require('amqplib');
 
 var Worker = require('./lib/worker');
 var Rpc = require('./lib/rpc');
@@ -14,15 +14,8 @@ class RabbitMQ {
 		this.queue = new Map();
 	}
 
-	connect(_ready) {
-		amqp.connect(this.config.uri, (_err, _conn) => {
-			if (_err) {
-				return _ready(new Error("Can not connect to RabbitMQ"));
-			} else {
-				this.connection = _conn;
-				_ready(null);
-			}
-		});
+	async connect() {
+		this.connection = await amqp.connect(this.config.uri);
 	}
 
 	worker(_name, _handler) {

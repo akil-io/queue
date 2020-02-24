@@ -1,10 +1,13 @@
 {
   "name": "env-rmq",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "PubSub, Queue, RPC wrapper for RabbitMQ",
   "main": "index.js",
+  "engines": {
+    "node": ">=7"
+  },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "forward": "ssh -f -N -L 5672:localhost:5672"
   },
   "repository": {
     "type": "git",
@@ -24,8 +27,8 @@
   },
   "homepage": "https://github.com/akil-io/queue#readme",
   "dependencies": {
-    "amqplib": "^0.5.1",
-    "debug": "^2.6.8",
-    "node-uuid": "^1.4.8"
+    "amqplib": "^0.5.5",
+    "debug": "^4.1.1",
+    "uuid": "^3.3.3"
   }
 }

@@ -3,12 +3,15 @@
 ## Init
 
 ```javascript
-var RabbitMQ = require('env-rmq').RabbitMQ;
+const RabbitMQ = require('env-rmq').RabbitMQ;
 
-var rmq = new RabbitMQ(config);
-rmq.connect(function () {
-	debug('connected');
-	callback(null, rmq);
+const rmq = new RabbitMQ({
+	uri: 'amqp://user:password@localhost/'
+});
+rmq.connect().then(() => {
+	console.log('Ready.');
+}).catch(err => {
+	console.log('Error: ', err);
 });
 ```
 
@@ -25,6 +28,10 @@ rmq.worker('my-queue-name', function (msg, reject, ack) {
 ### Client - send task
 
 ```javascript
+// Assert channel on application loading
+rmq.worker('my-queue-name');
+
+// Send task everywhere
 rmq.worker('my-queue-name').send({
 	someField: "Hello world!"
 });
@@ -43,6 +50,9 @@ rmq.pubsub('my-pub-name', function (msg, reject, ack) {
 ### Sender
 
 ```javascript
+// Assert channel on application loading
+rmq.pubsub('my-pub-name');
+
 rmq.pubsub('my-pub-name').send({
 	someField: "Hello world!"
 });
@@ -63,9 +73,12 @@ rmq.rpc('my-function', function (msg, reject, ack) {
 ### Client
 
 ```javascript
-rmq.pubsub('my-function').call({
+// Assert channel on application loading
+rmq.rpc('my-function');
+
+rmq.rpc('my-function').call({
 	someField: "Hello world!"
-}, function (result) {
+}).then(result => {
 	console.log("RETURNED VALUE:", result);
 });
 ```
